@@ -1,5 +1,6 @@
 # responsive-filters-card
-
+### Description 
+: 3 responsive component, seatch input pagination & Employee card
 ## Project setup
 ```
 npm install
