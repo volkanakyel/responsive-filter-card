@@ -2,7 +2,7 @@
   <div>
     <div class="element-container">
       <div class="search-container">
-        <SearchInput />
+        <SearchInput labelText="Search by name" v-model="filterEmployee" />
       </div>
       <div class="cards-container">
         <div class="cards">
@@ -36,6 +36,7 @@ export default {
   data() {
     return {
       employes: employees,
+      filterEmployee: "",
     };
   },
 };

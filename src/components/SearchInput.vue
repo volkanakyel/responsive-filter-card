@@ -3,8 +3,8 @@
     <div class="wrapper">
       <h2>Meet the team</h2>
       <div class="input-data">
-        <input v-model="nameInput" type="text" maxlength="50" />
-        <label>{{ labelText }}</label>
+        <input @input="updateValue" :value="value" type="text" maxlength="50" />
+        <label v-if="labelText">{{ labelText }}</label>
         <i class="fas fa-search"></i>
         <button class="btn-filter">Filter</button>
       </div>
@@ -25,14 +25,25 @@
 
 <script>
 export default {
+  props: {
+    labelText: {
+      type: String,
+      default: "",
+    },
+    value: [String, Number],
+  },
   data() {
     return {
       nameInput: "",
-      labelText: "Search by name",
     };
   },
+  methods: {
+    updateValue(event) {
+      this.$emit("input", event.target.value);
+    },
+  },
   watch: {
-    nameInput(val) {
+    value(val) {
       if (val) this.labelText = "";
       else this.labelText = "Search by name";
     },
