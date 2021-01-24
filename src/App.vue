@@ -10,7 +10,6 @@ import EmployeeCards from "@/components/EmployeeCards.vue";
 export default {
   components: {
     EmployeeCards,
-    // Pagination,
   },
 };
 </script>
