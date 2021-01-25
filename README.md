@@ -11,7 +11,7 @@
 ## Project setup
 
 ```
-git clone https://github.com/volkanakyel/responsive-filters-card.git
+https://github.com/volkanakyel/responsive-filter-card.git
 cd responsive-filters-card/
 npm install
 ```
