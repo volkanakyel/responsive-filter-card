@@ -6,7 +6,11 @@
       </div>
       <div class="cards-container">
         <div class="cards">
-          <div v-for="employee in employes" :key="employee.id" class="card">
+          <div
+            v-for="employee in filteredEmploye"
+            :key="employee.id"
+            class="card"
+          >
             <div class="container">
               <img :src="employee.image" alt="" />
             </div>
@@ -18,7 +22,9 @@
             </div>
           </div>
         </div>
-        <Pagination />
+        <Pagination
+          :class="{ 'disappear-pagination': !filteredEmploye.length }"
+        />
       </div>
     </div>
   </div>
@@ -38,6 +44,15 @@ export default {
       employes: employees,
       filterEmployee: "",
     };
+  },
+  computed: {
+    filteredEmploye() {
+      return this.employes.filter((employe) => {
+        return employe.fullname
+          .toLowerCase()
+          .includes(this.filterEmployee.toLowerCase());
+      });
+    },
   },
 };
 </script>
@@ -116,5 +131,9 @@ export default {
 .details > p {
   font-size: 13px;
   margin: 5px 0px 20px 10px;
+}
+
+.disappear-pagination {
+  display: none;
 }
 </style>

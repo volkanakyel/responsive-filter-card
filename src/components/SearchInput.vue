@@ -3,7 +3,13 @@
     <div class="wrapper">
       <h2>Meet the team</h2>
       <div class="input-data">
-        <input @input="updateValue" :value="value" type="text" maxlength="50" />
+        <input
+          @input="updateValue"
+          :value="value"
+          type="text"
+          maxlength="30"
+          required
+        />
         <label v-if="labelText">{{ labelText }}</label>
         <i class="fas fa-search"></i>
         <button class="btn-filter">Filter</button>
@@ -28,7 +34,7 @@ export default {
   props: {
     labelText: {
       type: String,
-      default: "",
+      default: "Search input",
     },
     value: [String, Number],
   },
@@ -39,13 +45,8 @@ export default {
   },
   methods: {
     updateValue(event) {
+      /* Update input value from parent component */
       this.$emit("input", event.target.value);
-    },
-  },
-  watch: {
-    value(val) {
-      if (val) this.labelText = "";
-      else this.labelText = "Search by name";
     },
   },
 };
@@ -138,10 +139,12 @@ h2 {
   position: relative;
 }
 
-.input-data input:focus ~ label {
+.input-data input:focus ~ label,
+.input-data input:valid ~ label {
   /* Transition raising label */
   transform: translateY(-23px);
   font-size: 15px;
+  color: #3727c6;
 }
 
 .wrapper .input-data input {
@@ -159,6 +162,7 @@ h2 {
   pointer-events: none;
   transition: all 0.3s ease;
 }
+
 .input-data i {
   /* Align search icon on search input */
   position: absolute;
