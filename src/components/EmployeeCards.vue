@@ -1,70 +1,63 @@
 <template>
   <div>
-    <div class="element-container">
-      <div class="search-container">
+    <div class="employe-section">
+      <div class="employe-section__search-panel">
         <SearchInput labelText="Search by name" v-model="filterEmployee" />
       </div>
       <div class="cards-container">
         <div class="cards">
-          <div
-            v-for="employee in filteredEmploye"
-            :key="employee.id"
-            class="card"
-          >
-            <div class="container">
-              <img :src="employee.image" alt="" />
-            </div>
-            <div class="details">
-              <h3>{{ employee.fullname }}</h3>
-              <p>
-                {{ employee.role }}
-              </p>
-            </div>
+          <div v-for="employe in filteredEmploye" :key="employe.id.value">
+            <Card :employeInfos="employe" />
           </div>
         </div>
-        <Pagination
-          :class="{ 'disappear-pagination': !filteredEmploye.length }"
-        />
+        <Pagination :class="{ 'disappear-pagination': !getEmploye }" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import employees from "@/lib/employee.json";
 import SearchInput from "@/components/SearchInput.vue";
 import Pagination from "@/components/Pagination.vue";
+import Card from "@/components/Card.vue";
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   components: {
     SearchInput,
     Pagination,
+    Card,
   },
   data() {
     return {
-      employes: employees,
       filterEmployee: "",
     };
   },
+  methods: {
+    ...mapActions({
+      fetchEmploye: "fetchEmployeList",
+    }),
+  },
   computed: {
+    ...mapGetters(["getEmploye"]),
     filteredEmploye() {
-      return this.employes.filter((employe) => {
-        return employe.fullname
-          .toLowerCase()
-          .includes(this.filterEmployee.toLowerCase());
-      });
+      return this.getEmploye
+        ? this.getEmploye.filter((employe) => {
+            return employe.name.first
+              .toLowerCase()
+              .includes(this.filterEmployee.toLowerCase());
+          })
+        : [];
     },
+  },
+  created() {
+    this.fetchEmploye();
+    console.log(this.getEmploye);
   },
 };
 </script>
 
-<style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
+<style lang="scss">
 @media (max-width: 900px) {
   .cards {
     display: grid;
@@ -80,20 +73,20 @@ export default {
     display: block;
     border-radius: 5px 5px 0 0;
   }
-  .element-container {
+  .employe-section {
     padding-top: 7vh;
     padding-bottom: 7vh;
   }
 }
 
 @media (min-width: 900px) {
-  .element-container {
+  .employe-section {
     padding: 10vh;
     display: flex;
     width: 100%;
-  }
-  .search-container {
-    width: 30%;
+    &__search-panel {
+      width: 30%;
+    }
   }
   .cards-container {
     width: 70%;
@@ -117,20 +110,6 @@ export default {
 .card {
   border-radius: 5px 5px 5px 5px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-}
-
-/* Card text element */
-.details {
-  margin: 10px 10px 15px 10px;
-}
-.details > h3 {
-  font-weight: 700;
-  font-size: 18px;
-  margin: 20px 5px 5px 10px;
-}
-.details > p {
-  font-size: 13px;
-  margin: 5px 0px 20px 10px;
 }
 
 .disappear-pagination {

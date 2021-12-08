@@ -1,28 +1,20 @@
 <template>
-  <div>
-    <ul>
-      <li><a class="navigation" href="">Previous</a></li>
-      <li><a class="pagination-item-first" href="">1</a></li>
-      <li><a class="pagination-item" href="">2</a></li>
-      <li><a class="pagination-item" href="">3</a></li>
-      <li><a class="pagination-item" href="">...</a></li>
-      <li><a class="pagination-item-last" href="">16</a></li>
-      <li><a class="navigation" href="">Next</a></li>
-    </ul>
-  </div>
+  <ul class="pagination">
+    <li><a class="navigation" href="">Previous</a></li>
+    <li><a class="pagination-item-first" href="">1</a></li>
+    <li><a class="pagination-item" href="">2</a></li>
+    <li><a class="pagination-item" href="">3</a></li>
+    <li><a class="pagination-item" href="">...</a></li>
+    <li><a class="pagination-item-last" href="">16</a></li>
+    <li><a class="navigation" href="">Next</a></li>
+  </ul>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
+<style>
 @media (max-width: 900px) {
   /* Change style for screen smaller than 900px */
   ul {
