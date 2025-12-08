@@ -1,25 +1,24 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-Vue.use(Vuex);
-import { getEmploye } from '../services/getEmploye';
-export default new Vuex.Store({
-  state: {
-    employeList:[],
-  },
+import { defineStore } from 'pinia'
+import { getEmploye } from '../services/getEmploye'
+
+export const useEmployeeStore = defineStore('employee', {
+  state: () => ({
+    employeeList: []
+  }),
+
   getters: {
-    getEmploye : state => {
-      return state.employeList[0]?.results;
-    }
+    employees: (state) => state.employeeList
   },
-  mutations: {
-    SET_EMPLOYE(state, employe) {
-      state.employeList.push(employe);
-    }
-  },
+
   actions: {
-    async fetchEmployeList(store) {
-      const employe = await getEmploye()
-      store.commit('SET_EMPLOYE', employe)
+    async fetchEmployees() {
+      try {
+        const data = await getEmploye()
+        this.employeeList = data?.results || []
+      } catch (error) {
+        console.error('Failed to fetch employees:', error)
+        this.employeeList = []
+      }
     }
-  },
-}) 
+  }
+})
