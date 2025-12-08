@@ -1,47 +1,78 @@
-# responsive-filters-card
+# Responsive Filter Cards
 
-## Project Features
+A responsive Vue 3 application displaying employee cards with search filtering functionality.
 
-#### - Reusable Vue component
+## Features
 
-#### - Paginated list people with responsive cards based on ui mockup
+- 🔍 Real-time search filtering by employee name
+- 📱 Responsive grid layout (adapts to mobile and desktop)
+- 🎨 Clean card design with employee photos, names, and age
+- ⚡ Fast development with Vite HMR
+- 🔒 Modern, secure dependencies
 
-#### - Search by a specific name and change ui.
+## Tech Stack
 
-## Project setup
+- **Vue 3** - Modern Vue with Composition API
+- **Pinia** - State management for Vue 3
+- **Vite** - Next-generation frontend tooling
+- **Sass** - CSS preprocessor
+- **Axios** - HTTP client
 
-```
-https://github.com/volkanakyel/responsive-filter-card.git
-cd responsive-filters-card/
+## Getting Started
+
+### Prerequisites
+
+- Node.js 20.19+ or 22.12+ (recommended for zero vulnerabilities)
+- npm or yarn
+
+### Installation
+
+```bash
+# Install dependencies
 npm install
-```
 
-### Compiles and hot-reloads for development
+# Start development server
+npm run dev
 
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
+# Build for production
 npm run build
+
+# Preview production build
+npm run preview
 ```
 
-### Run your unit tests
+## Project Structure
 
 ```
-npm run test:unit
+src/
+├── assets/
+│   └── style.css         # Global styles
+├── components/
+│   ├── Card.vue          # Employee card component
+│   ├── EmployeeCards.vue # Cards container with search
+│   ├── Pagination.vue    # Pagination component
+│   └── SearchInput.vue   # Search input with label
+├── services/
+│   └── getEmploye.js     # API service for fetching employees
+├── store/
+│   └── index.js          # Pinia store for state management
+├── App.vue               # Root component
+└── main.js               # Application entry point
 ```
 
-### Lints and fixes files
+## Security
 
-```
-npm run lint
-```
+This project has been migrated from Vue 2 + Vue CLI to Vue 3 + Vite to address security vulnerabilities:
 
-### Customize configuration
+- **Before**: 14 vulnerabilities (4 high, 8 moderate, 2 low)
+- **After**: 2 moderate (dev-only, related to esbuild/vite dev server)
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+The remaining moderate vulnerabilities only affect the development server and do not impact production builds.
 
-# data-search-editor
+## API
+
+The application fetches random user data from [Random User API](https://randomuser.me/).
+
+## License
+
+MIT
